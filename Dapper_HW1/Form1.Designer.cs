@@ -34,6 +34,7 @@
             this.edit_btn = new System.Windows.Forms.Button();
             this.clear_btn = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -95,16 +96,29 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
+            this.textBox1.Location = new System.Drawing.Point(12, 17);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(381, 27);
+            this.textBox1.Size = new System.Drawing.Size(345, 27);
             this.textBox1.TabIndex = 5;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.Location = new System.Drawing.Point(339, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(54, 29);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "ref";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(405, 560);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.clear_btn);
             this.Controls.Add(this.edit_btn);
@@ -127,5 +141,6 @@
         private Button edit_btn;
         private Button clear_btn;
         private TextBox textBox1;
+        private Button button1;
     }
 }

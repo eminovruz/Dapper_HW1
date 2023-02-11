@@ -16,7 +16,7 @@ namespace Dapper_HW1.User_Controls
 {
     public partial class AddViewUC : UserControl
     {
-        public Book? Book { get; set; }
+        public Book? Book { get; set; } = new();
         SqlConnection? connection = null;
 
 
@@ -35,7 +35,9 @@ namespace Dapper_HW1.User_Controls
                 textBox5.Text = b.Stock.ToString();
             }
 
-            Book = b;
+            if(mod == ActionMod.Update)
+                Book = b;
+
             this.connection = connection;
         }
         private void button2_Click(object sender, EventArgs e)
@@ -45,9 +47,6 @@ namespace Dapper_HW1.User_Controls
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var command = @"
-            INSERT INTO BOOK VALUES(@Name, @Page, @Author, @Price, @Stock)
-";
             Book.Name = textBox1.Text;
             Book.Page = Int32.Parse(textBox2.Text);
             Book.Author = textBox3.Text;
@@ -56,8 +55,23 @@ namespace Dapper_HW1.User_Controls
 
             if (button1.Text == "Add")
             {
+                var command = @"
+            INSERT INTO BOOK VALUES(@Name, @Page, @Author, @Price, @Stock)
+";
+                
+
                 connection.Execute(command, new { Book.Name, Book.Page, Book.Author, Book.Price, Book.Stock });
+                MessageBox.Show("Book Added ! ");
+                this.Dispose();
             }
+            var cmd = @" 
+            UPDATE BOOK SET NAME = @name, PAGE = @page, PRICE = @price, STOCK = @stock WHERE ID = Id 
+";
+            
+            connection.Execute(cmd, new { Book.Name, Book.Page, Book.Author, Book.Price, Book.Stock });
+            this.Dispose();
+
+
         }
     }
 }

@@ -82,5 +82,33 @@ namespace Dapper_HW1
             this.Controls.Add(addView);
             addView.BringToFront();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            FillData();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            try
+            {
+                var command = "SELECT * FROM BOOK WHERE [NAME] = @name";
+
+                var reader = connection.ExecuteReader(command, new {textBox1.Text});
+                var table = new DataTable();
+                table.Load(reader);
+
+                foreach (DataRow item in table.Rows)
+                {
+                    listBox1.Items.Add(item[0] + " " + item[1] + " " + item[2] + " " + item[3] + " " + item[4] + " " + item[5]);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
